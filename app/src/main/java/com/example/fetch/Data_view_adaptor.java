@@ -16,28 +16,51 @@ public class Data_view_adaptor extends RecyclerView.Adapter<Data_view_adaptor.My
 
     Context context;
     ArrayList<DataModel> model;
+
+    /**
+     * Constructor set the global variables
+     *
+     * @param context The context for which the adaptor was called
+     * @param model The DataModel ArrayList belonging to the recyclerView being created
+     */
     public Data_view_adaptor(Context context, ArrayList<DataModel> model){
         this.context=context;
         this.model = model;
     }
+
+    /**
+     * Inflates the view the correct cards
+     *
+     * @param parent The ViewGroup into which the new View will be added after it is bound to
+     *               an adapter position.
+     * @param viewType The view type of the new View.
+     *
+     * @return a new adaptor
+     */
     @NonNull
     @Override
     public Data_view_adaptor.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //inflate layout
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.r_view_row, parent, false);
 
         return new Data_view_adaptor.MyViewHolder(view);
     }
 
+    /**
+     * Updates/assigns values to each card displayed
+     *
+     * @param holder The ViewHolder which should be updated to represent the contents of the
+     *        item at the given position in the data set.
+     * @param position The position of the item within the adapter's data set.
+     */
     @Override
     public void onBindViewHolder(@NonNull Data_view_adaptor.MyViewHolder holder, int position) {
         //assign values
         DataModel current = model.get(position);
 
-        holder.name.setText(current.getName());
-        holder.listId.setText(String.valueOf(current.getListId()));
-        holder.id.setText(String.valueOf(current.getId()));
+        String preId = "List ID: " + current.getListId();
+        holder.name.setText( current.getName());
+        holder.listId.setText(preId);
 
         if (current.getListId() == 1) {
             holder.card.setCardBackgroundColor(context.getColor(R.color.color1));
@@ -51,23 +74,32 @@ public class Data_view_adaptor extends RecyclerView.Adapter<Data_view_adaptor.My
 
     }
 
+    /**
+     * @return the total number of items in model
+     */
     @Override
     public int getItemCount() {
         //how many to display
         return model.size();
     }
 
+
+
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView name, id, listId;
+        TextView name, listId;
         CardView card;
 
+        /**
+         * Assigns the different view variables so that they can be set
+         *
+         * @param itemView the view associated with the activity calling the Data_view_adaptor
+         */
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             name = itemView.findViewById(R.id.name);
             listId = itemView.findViewById(R.id.listId);
-            id = itemView.findViewById(R.id.id);
             card = itemView.findViewById(R.id.card);
         }
     }
