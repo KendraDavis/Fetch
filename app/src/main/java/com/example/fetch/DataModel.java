@@ -6,7 +6,6 @@ public class DataModel {
     String name;
     int listId;
     int id;
-    String color;
 
 
     public DataModel(String name, int listID, int id) {
@@ -15,7 +14,6 @@ public class DataModel {
         this.id = id;
 
     }
-
 
     public String getName() {
         return name;

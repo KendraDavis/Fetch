@@ -53,22 +53,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                URL url = null;
-                BufferedReader in;
                 try {
-                    url = new URL("https://fetch-hiring.s3.amazonaws.com/hiring.json");
-
+                    URL url = new URL("https://fetch-hiring.s3.amazonaws.com/hiring.json");
                     URLConnection fetchData = url.openConnection();
-                    in = new BufferedReader(new InputStreamReader(fetchData.getInputStream()));
+                    BufferedReader in = new BufferedReader(new InputStreamReader(fetchData.getInputStream()));
 
                     JSONObject job;
 
                     String inputLine = in.readLine();
                     while (inputLine != null) {
                         if(!inputLine.equals("[") && !inputLine.equals("]")) {
-//                            dataStream += '\n' + inputLine;
                             job = (JSONObject) new JSONTokener(inputLine).nextValue();
-
                             if(!job.get("name").equals(null) && !job.get("name").equals("")){
                                 int listId = (int) job.get("listId");
                                 String name = (String) job.get("name");
@@ -81,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                         inputLine = in.readLine();
                     }
+
+                    in.close();
 
                 } catch (MalformedURLException e) {
                     Log.e("Error", "Malformed URL Exception");
@@ -99,9 +96,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-        int i = 0;
         while (!flag) {
-            i++;
+            // forces wait until thread finishes
         }
 
         if (errorOccured){
