@@ -6,7 +6,7 @@ public class DataModel {
     int id;
 
     /**
-     *
+     * Constructor to setup the object
      * @param name name to be assigned to the object
      * @param listID listId to be assigned to the object
      * @param id id to be assigned to the object

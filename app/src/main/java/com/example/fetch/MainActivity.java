@@ -24,7 +24,6 @@ import java.util.concurrent.Executors;
 public class MainActivity extends AppCompatActivity {
     static Boolean flag = false; // indicates the data thread has successfully finished
     static Boolean errorOccurred = false; // if true an error has occurred
-    static int removed = 0; // number of variables removed due to names missing
     static ArrayList<DataModel> data = new ArrayList<>();
 
     /**
@@ -81,10 +80,7 @@ public class MainActivity extends AppCompatActivity {
                             String name = (String) job.get("name");
                             int id = (int) job.get("id");
                             data.add(new DataModel(name, listId, id));
-                        } else {
-                            removed++;
                         }
-
                     }
                     inputLine = in.readLine();
                 }

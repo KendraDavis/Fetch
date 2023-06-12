@@ -55,7 +55,6 @@ public class Data_view_adaptor extends RecyclerView.Adapter<Data_view_adaptor.My
      */
     @Override
     public void onBindViewHolder(@NonNull Data_view_adaptor.MyViewHolder holder, int position) {
-        //assign values
         DataModel current = model.get(position);
 
         String preId = "List ID: " + current.getListId();
@@ -79,7 +78,6 @@ public class Data_view_adaptor extends RecyclerView.Adapter<Data_view_adaptor.My
      */
     @Override
     public int getItemCount() {
-        //how many to display
         return model.size();
     }
 
